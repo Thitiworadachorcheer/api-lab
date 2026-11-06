@@ -8,9 +8,12 @@
 - Step 0.16, blocks of "how many of the three tools are excluded": แบ่งออกเป็น 4 blocks ได้แก่ - - 
 ไม่ตัดเครื่องมือออกเลย ([]), ตัดออก 1 ชิ้น (เช่น ["Knife"] หรือ ["Scissors"]), ตัดออก 2 ชิ้น (เช่น ["Knife", "Pizza cutter"]), และตัดออก 3 ชิ้นครบทุกชิ้น (["Knife", "Pizza cutter", "Scissors"])
 
-Defect report
+## Defect report
 Title: การตัดเครื่องมือทำพิซซ่าออกทั้งหมดส่งผลให้เซิร์ฟเวอร์ตอบกลับ 500 แทนที่จะเป็น 400
 Request: POST /api/pizza พร้อม header Authorization และ body {"excludedTools": ["Knife", "Pizza cutter", "Scissors"]}
 Expected result: สถานะ 400 Bad Request พร้อมข้อความ error ในรูปแบบ JSON แจ้งว่าไม่สามารถจัดหาพิซซ่าตามเงื่อนไขได้
 Actual result: สถานะ 500 Internal Server Error พร้อม body ว่างเปล่า
 Severity: ปานกลาง เพราะแม้จะไม่ทำให้ระบบล่มทั้งเซิร์ฟเวอร์ แต่การตอบ 500 ทำให้ฝั่งแอปพลิเคชันเข้าใจผิดว่าเป็นข้อผิดพลาดภายในของเซิร์ฟเวอร์ แทนที่จะแจ้งเตือนผู้ใช้ว่าเงื่อนไขเป็นไปไม่ได้
+
+## Part A
+- Step A4, status codes when the other user reads, changes and deletes: อ่านได้ 404, แก้ไขได้ 400, และลบได้ 400 โดยข้อมูลเดิมของเจ้าของไม่ได้รับผลกระทบใดๆ
